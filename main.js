@@ -24,9 +24,11 @@ async function init() {
 		if (currentGuess.length < ANSWER_LENGTH) {
 			currentGuess += letter;
 		} else {
+			// if the user has already entered 5 letters, replace the last letter
+			// TODO: I think you can also do slice(0, -1) here to be more concise
 			current = currentGuess.substring(0, currentGuess.length - 1) + letter;
 		}
-
+		// update the UI
 		letters[currentRow * ANSWER_LENGTH + currentGuess.length - 1].innerText =
 			letter;
 	}
@@ -34,7 +36,7 @@ async function init() {
 	// use tries to enter a guess
 	async function commit() {
 		if (currentGuess.length !== ANSWER_LENGTH) {
-			// do nothing
+			// do nothing - answer needs to be 5 letters
 			return;
 		}
 
